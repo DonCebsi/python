@@ -76,9 +76,10 @@ class KNearestNeighbor(object):
                 # not use a loop over dimension, nor use np.linalg.norm().          #
                 #####################################################################
                 # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-                pass
-
+                # l2 distance = sqrt((x-y)^2)
+                
+                dists[i,j] = np.sqrt(np.sum((X[i] - self.X_train[j])**2))
+                
                 # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
@@ -100,8 +101,9 @@ class KNearestNeighbor(object):
             # Do not use np.linalg.norm().                                        #
             #######################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-            pass
+            # l2 distance = sqrt((x-y)^2)
+ 
+            dists[i, :] = np.sqrt(np.sum((X[i]-X_train)**2,axis=1))
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
@@ -130,8 +132,11 @@ class KNearestNeighbor(object):
         #       and two broadcast sums.                                         #
         #########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-        pass
+        # l2 distance = sqrt((x-y)^2) = sqrt(x^2-2xy+y^2)
+        xsquared= X**2.sum(axis = 1).reshape(num_test,1)
+        ysquared=self.X_train**2.sum(axis=1).reshape(1,num_train)
+        xy2 = -2*(X.dot(self.X_train.T))
+        dists = np.sqrt(xsquared+ysquared+xy2)
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
@@ -164,7 +169,7 @@ class KNearestNeighbor(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            y_pred
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
             #########################################################################
